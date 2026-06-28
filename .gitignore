@@ -1,0 +1,60 @@
+# === Root Monorepo ===
+.DS_Store
+*.log
+.vscode/
+.idea/
+
+# === Website (Next.js) ===
+website/node_modules/
+website/.next/
+website/out/
+website/build/
+website/.pnp
+website/.pnp.*
+website/coverage/
+website/*.tsbuildinfo
+website/next-env.d.ts
+
+# Environment variables - NEVER COMMIT THESE
+website/.env*
+!website/.env.example
+!website/.env.local.example
+
+# Uploads and generated content
+website/public/uploads/**
+!website/public/uploads/.gitkeep
+
+# Vercel
+website/.vercel
+
+# Python Backend
+website/python-backend/__pycache__/
+website/python-backend/*.pyc
+website/python-backend/.pytest_cache/
+website/python-backend/venv/
+website/python-backend/.venv/
+
+# === Robot Training (ROS 2) ===
+robot-training/build/
+robot-training/install/
+robot-training/log/
+robot-training/.catkin_workspace
+robot-training/devel/
+
+# Lima VM artifacts
+*.qcow2
+*.iso
+
+# ROS generated files
+robot-training/**/__pycache__/
+robot-training/**/*.pyc
+robot-training/**/.pytest_cache/
+
+# Camera calibration data (can be sensitive)
+robot-training/cameras/calibration_data/
+robot-training/cameras/*.yaml
+
+# Sensitive credentials
+*.pem
+*.key
+*_credentials.json
