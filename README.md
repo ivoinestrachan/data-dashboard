@@ -1,6 +1,6 @@
-# 2arm - Industrial Robot Motion Training Platform
+# 2arm - Marketplace for Human Motion Data
 
-> **Hackathon Project:** Complete end-to-end platform for training industrial robots using human demonstrations captured with Ray-Ban Meta smart glasses.
+> **The first marketplace where anyone can earn money by recording skills, and robotics companies can buy human motion data to train their robots.**
 
 ---
 
@@ -17,75 +17,128 @@ This README provides:
 
 ## 🎯 What Does It Do?
 
-**2arm** is an industrial robot training data platform that solves the problem of teaching robots complex manual tasks. Instead of programming robots by hand, operators can simply:
+**2arm is a marketplace for human motion data.** Anyone with a wearable recording device can record a skill such as cooking, mechanical work, or surgery, upload it, and earn money each time it sells, while robotics companies buy that data to train their robots. The capture hardware is already in millions of hands and no commercial marketplace exists yet, so we connect a flood of supply to fast-growing demand.
 
-1. **Demonstrate the task** while wearing Ray-Ban Meta smart glasses
-2. **Upload the video** to the web platform
-3. **Let AI track hand movements** using MediaPipe computer vision
-4. **Publish the trained model** to a marketplace
-5. **Deploy to robots** using ROS 2 simulation and real hardware
+### The Problem
+
+- **Robotics companies** need massive amounts of human demonstration data to train robots
+- **Skilled workers** have valuable knowledge but no way to monetize their expertise
+- **Recording devices** (Ray-Ban Meta, Apple Vision Pro) are already in millions of hands
+- **No marketplace exists** to connect data creators with robotics companies
+
+### The Solution
+
+**For Data Creators (Supply Side):**
+1. **Record a skill** using any wearable device (Ray-Ban Meta glasses, phones, etc.)
+2. **Upload to 2arm** - our AI automatically tracks hand movements in 3D
+3. **Set your price** and publish to the marketplace
+4. **Earn money** every time a robotics company downloads your data
+
+**For Robotics Companies (Demand Side):**
+1. **Browse the marketplace** for specific skills and tasks
+2. **Preview trajectories** and motion quality before buying
+3. **Download training data** in standardized format (JSON with 3D landmarks)
+4. **Train robots** using real human demonstrations
 
 ### Real-World Use Cases
 
-- **Manufacturing:** Train robots to perform pick-and-place, welding, assembly tasks
-- **Quality Control:** Teach inspection procedures through human demonstration
-- **Packaging:** Automate complex packaging sequences
-- **Skill Transfer:** Share motion models across factories and robot fleets
+**Data Creators Can Monetize:**
+- 🍳 **Cooking skills** - Professional chefs teaching food preparation
+- 🔧 **Mechanical work** - Technicians demonstrating repair procedures
+- ⚕️ **Surgery** - Surgeons sharing precise hand movements
+- 🏭 **Manufacturing** - Operators recording assembly techniques
+- 🎨 **Crafts** - Artisans documenting traditional techniques
+
+**Robotics Companies Can Train:**
+- **Humanoid robots** learning daily tasks
+- **Industrial robots** performing complex assembly
+- **Surgical robots** mimicking expert surgeons
+- **Service robots** handling delicate objects
+- **Agricultural robots** harvesting crops
 
 ### What Makes It Unique?
 
-- **No programming required** - Operators demonstrate, robots learn
-- **Smart glasses integration** - Hands-free recording with egocentric view
-- **Full pipeline** - From video upload to robot deployment
-- **Marketplace** - Share and monetize training data
-- **Open source** - Built on modern web tech and open robotics standards
+- **💰 First-to-market** - No commercial marketplace for human motion data exists
+- **📱 Hardware ready** - Millions already own Ray-Ban Meta, Apple Vision Pro, phones
+- **🤖 AI-powered** - Automatic 3D hand tracking using MediaPipe
+- **🔄 End-to-end** - From recording to robot deployment
+- **🌍 Global scale** - Anyone, anywhere can contribute and earn
+- **🎯 Quality controlled** - Preview before purchase, ratings, and verification
 
 ---
 
 ## 🔧 How Does It Work?
 
+### The Marketplace Flow
+
+```
+DATA CREATORS (Supply)          2arm Platform          ROBOTICS COMPANIES (Demand)
+
+👤 Record with wearables  →  📹 Upload video       →  🔍 Browse marketplace
+   (Ray-Ban Meta, phone)      🤖 AI tracks hands        💰 Purchase data
+                              📊 Generate 3D data       📥 Download JSON
+   💵 Set price          →  🏪 List in marketplace →  🤖 Train robots
+   💰 Earn per sale
+```
+
 ### Architecture Overview
 
-The platform consists of two main components working together:
+The platform consists of two main components:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                     2arm Platform                            │
+│                     2arm Marketplace                         │
 ├──────────────────────────┬──────────────────────────────────┤
-│   Website (Frontend)     │   Robot Training (Backend)       │
+│   Website (Marketplace)  │   Robot Training (Validation)    │
 │                          │                                  │
-│  • Next.js 16 + Turbo    │  • ROS 2 Humble                 │
-│  • Supabase Backend      │  • MoveIt 2                     │
-│  • MediaPipe Tracking    │  • Bimanual OpenArm             │
-│  • Framer Motion UI      │  • Lima VM (macOS)              │
-│  • TypeScript            │  • Foxglove Visualization       │
+│  • Upload & earn         │  • Test with real robots         │
+│  • Browse & buy          │  • ROS 2 simulation              │
+│  • AI tracking           │  • Verify data quality           │
+│  • Payment system        │  • Export to formats             │
+│  • Seller dashboard      │  • Hardware deployment           │
 └──────────────────────────┴──────────────────────────────────┘
 ```
 
 ### Technical Flow
 
-#### 1. Data Collection (Website)
+#### 1. Data Creator Upload (Supply Side)
 ```
-Ray-Ban Meta Glasses → Video Recording → Upload to Platform
-                                              ↓
-                                    Stored in Supabase
+Wearable Device → Record Skill → Upload to 2arm
+                                      ↓
+                          MediaPipe AI Processing
+                                      ↓
+                          3D Hand Trajectories
+                                      ↓
+                          Set Price & Publish
 ```
 
-#### 2. Motion Analysis (Python Backend)
+#### 2. Motion Analysis (Platform)
 ```
-Video Frames → MediaPipe Hand Tracking → 3D Hand Landmarks
+Video Frames → MediaPipe Hand Tracking → 21-point 3D Landmarks
                                               ↓
                                     Trajectory Generation
+                                              ↓
+                                    Quality Scoring (95%+ accuracy)
 ```
 
-#### 3. Training Data Management (Website)
+#### 3. Marketplace (Demand Side)
 ```
-Trajectories → Categorization → Quality Check → Publish to Marketplace
+Browse by Category → Preview Trajectories → Purchase Data
+                                              ↓
+                                    Download JSON with:
+                                    • 3D hand landmarks
+                                    • Timestamps
+                                    • Metadata
+                                    • Video reference
 ```
 
-#### 4. Robot Deployment (Robot Training)
+#### 4. Robot Deployment (Customer Use)
 ```
-Training Data → ROS 2 Simulation → Motion Planning (MoveIt) → Robot Execution
+Training Data → ROS 2 Simulation → Motion Planning → Real Robot
+      ↓
+   Validate quality
+      ↓
+   Deploy to fleet
 ```
 
 ### Key Technologies
