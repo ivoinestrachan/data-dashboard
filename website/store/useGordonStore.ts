@@ -16,6 +16,7 @@ export interface MarketplaceModel {
   specialty: string;
   level: number;
   cost: number;
+  category?: string;
   avatar?: string;
   videoId?: string | number;
   thumbnailUrl?: string | null;
